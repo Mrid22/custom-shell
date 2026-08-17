@@ -7,8 +7,30 @@ from fabric.utils import get_relative_path
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
-from fabric.audio.service import Audio
+from fabric.audio.service import Audio, AudioStream
 from plyer import battery
+
+
+class AudioWidget:
+    volume_label: Label = Label("")
+    volume_level: float = 0.0
+
+    def __init__(self, **kwargs):
+        self.audio = Audio(notify_speaker=self.on_speaker_changed)
+        self.volume_fabricator = Fabricator(
+            interval=500,
+            default_value=100,
+            poll_from=lambda _: self.audio.speaker.volume,
+            on_changed=lambda f, v: self.on_speaker_changed(),
+        )
+
+    def on_speaker_changed(self):
+        if not self.audio.speaker:
+            return
+
+        self.volume_level = self.audio.speaker.volume / 100
+        print(self.volume_level)
+        self.volume_label.set_label(str(self.volume_level) + "%")
 
 
 class BatteryWidget:
@@ -19,7 +41,7 @@ class BatteryWidget:
         # Update the percentage
         self.bat_percent = math.floor(v)
         self.bat_label.set_label(str(self.bat_percent) + "%")
-        print(self.bat_percent)
+        # print(self.bat_percent)
 
         # On Low Battery
         self.on_battery_low()
@@ -67,7 +89,11 @@ class Bar(Window):
             end_children=Box(
                 orientation="h",
                 spacing=10,
-                children=[BatteryWidget.bat_label, DateTime("%a %d %H:%M")],
+                children=[
+                    BatteryWidget.bat_label,
+                    DateTime("%a %d %H:%M"),
+                    AudioWidget.volume_label,
+                ],
             ),
         )
 
