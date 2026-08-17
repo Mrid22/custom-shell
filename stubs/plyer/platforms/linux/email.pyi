@@ -1,0 +1,6 @@
+from plyer.facades import Email as Email
+from plyer.utils import whereis_exe as whereis_exe
+
+class LinuxEmail(Email): ...
+
+def instance(): ...

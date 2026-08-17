@@ -1,0 +1,6 @@
+from plyer.facades import Accelerometer as Accelerometer
+from plyer.platforms.macosx.libs import osx_motion_sensor as osx_motion_sensor
+
+class OSXAccelerometer(Accelerometer): ...
+
+def instance(): ...

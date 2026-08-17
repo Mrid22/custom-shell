@@ -1,0 +1,6 @@
+from plyer.facades import Processors as Processors
+from plyer.utils import whereis_exe as whereis_exe
+
+class LinuxProcessors(Processors): ...
+
+def instance(): ...

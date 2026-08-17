@@ -1,0 +1,6 @@
+from plyer.facades import TTS as TTS
+from plyer.utils import whereis_exe as whereis_exe
+
+class EspeakTextToSpeech(TTS): ...
+
+def instance(): ...

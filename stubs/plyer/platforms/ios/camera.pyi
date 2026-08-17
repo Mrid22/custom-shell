@@ -1,0 +1,9 @@
+from plyer.facades import Camera as Camera
+from plyer.utils import reify as reify
+
+class iOSCamera(Camera):
+    @reify
+    def photos(self): ...
+    def capture_callback(self, photolibrary) -> None: ...
+
+def instance(): ...

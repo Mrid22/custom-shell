@@ -1,0 +1,6 @@
+from plyer.facades import Notification as Notification
+from plyer.platforms.win.libs.balloontip import balloon_tip as balloon_tip
+
+class WindowsNotification(Notification): ...
+
+def instance(): ...

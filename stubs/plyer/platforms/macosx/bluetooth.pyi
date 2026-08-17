@@ -1,0 +1,6 @@
+from plyer.facades import Bluetooth as Bluetooth
+from plyer.utils import whereis_exe as whereis_exe
+
+class OSXBluetooth(Bluetooth): ...
+
+def instance(): ...

@@ -1,0 +1,6 @@
+from plyer.facades import Brightness as Brightness
+
+class LinuxBrightness(Brightness):
+    def __init__(self) -> None: ...
+
+def instance(): ...

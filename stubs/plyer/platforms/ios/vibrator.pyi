@@ -1,0 +1,6 @@
+from plyer.facades import Vibrator as Vibrator
+
+class IosVibrator(Vibrator):
+    def __init__(self) -> None: ...
+
+def instance(): ...

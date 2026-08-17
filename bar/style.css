@@ -1,0 +1,10 @@
+* {
+  all: unset;
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 1px;
+}
+
+window {
+  background-color: rgba(0, 0, 0, 0.5);
+}

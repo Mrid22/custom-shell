@@ -1,0 +1,6 @@
+from plyer.facades import StoragePath as StoragePath
+from plyer.platforms.win.libs.win_api_defs import get_PATH as get_PATH
+
+class WinStoragePath(StoragePath): ...
+
+def instance(): ...

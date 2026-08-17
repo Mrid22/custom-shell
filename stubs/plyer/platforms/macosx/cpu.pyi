@@ -1,0 +1,6 @@
+from plyer.facades import CPU as CPU
+from plyer.utils import whereis_exe as whereis_exe
+
+class OSXCPU(CPU): ...
+
+def instance(): ...

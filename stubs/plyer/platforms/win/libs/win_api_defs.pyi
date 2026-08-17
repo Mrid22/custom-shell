@@ -1,0 +1,49 @@
+from _typeshed import Incomplete
+from ctypes import Structure
+from ctypes.wintypes import HANDLE, HICON, LPARAM
+
+__all__ = ['GUID', 'get_DLLVERSIONINFO', 'MAKEDLLVERULL', 'get_NOTIFYICONDATAW', 'CreateWindowExW', 'GetModuleHandleW', 'WindowProc', 'DefWindowProcW', 'get_WNDCLASSEXW', 'RegisterClassExW', 'UpdateWindow', 'LoadImageW', 'Shell_NotifyIconW', 'DestroyIcon', 'UnregisterClassW', 'DestroyWindow', 'LoadIconW', 'get_PATH']
+
+LRESULT = LPARAM
+HRESULT = HANDLE
+HCURSOR = HICON
+
+class GUID(Structure): ...
+class DLLVERSIONINFO(Structure): ...
+
+def get_DLLVERSIONINFO(*largs): ...
+def MAKEDLLVERULL(major, minor, build, sp): ...
+
+class NOTIFYICONDATAW(Structure): ...
+class NOTIFYICONDATAW_V3(Structure): ...
+class NOTIFYICONDATAW_V2(Structure): ...
+class NOTIFYICONDATAW_V1(Structure): ...
+
+def get_NOTIFYICONDATAW(*largs): ...
+
+CreateWindowExW: Incomplete
+GetModuleHandleW: Incomplete
+WindowProc: Incomplete
+DefWindowProcW: Incomplete
+
+class WNDCLASSEXW(Structure): ...
+
+def get_WNDCLASSEXW(*largs): ...
+
+RegisterClassExW: Incomplete
+UpdateWindow: Incomplete
+LoadImageW: Incomplete
+Shell_NotifyIconW: Incomplete
+DestroyIcon: Incomplete
+UnregisterClassW: Incomplete
+DestroyWindow: Incomplete
+LoadIconW: Incomplete
+
+class SYSTEM_POWER_STATUS(Structure): ...
+
+class GUID_(Structure):
+    def __init__(self, uuid_) -> None: ...
+
+class PathNotFoundException(Exception): ...
+
+def get_PATH(folderid): ...

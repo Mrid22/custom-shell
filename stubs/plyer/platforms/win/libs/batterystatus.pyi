@@ -1,0 +1,3 @@
+from plyer.platforms.win.libs import win_api_defs as win_api_defs
+
+def battery_status(): ...

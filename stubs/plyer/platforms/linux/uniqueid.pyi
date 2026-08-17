@@ -1,0 +1,6 @@
+from plyer.facades import UniqueID as UniqueID
+from plyer.utils import whereis_exe as whereis_exe
+
+class LinuxUniqueID(UniqueID): ...
+
+def instance(): ...

@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: custom-fabric-shell
+Version: 0.0.1
+Summary: Making a desktop shell
+Author-email: Mrid22 <mridul16381@proton.me>
+Maintainer-email: Mrid22 <mridul16381@proton.me>
+Requires-Python: >=3.11
+Requires-Dist: fabric @ git+https://github.com/Fabric-Development/fabric.git
+Requires-Dist: pycairo
+Requires-Dist: loguru
+Requires-Dist: pygobject

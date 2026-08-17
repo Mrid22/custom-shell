@@ -1,0 +1,3 @@
+class DeviceName:
+    @property
+    def device_name(self): ...

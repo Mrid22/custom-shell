@@ -1,0 +1,6 @@
+from plyer.facades import Battery as Battery
+from plyer.platforms.win.libs.batterystatus import battery_status as battery_status
+
+class WinBattery(Battery): ...
+
+def instance(): ...
