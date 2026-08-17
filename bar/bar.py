@@ -7,6 +7,7 @@ from fabric.utils import get_relative_path
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
+from fabric.audio.service import Audio
 from plyer import battery
 
 
@@ -29,7 +30,8 @@ class BatteryWidget:
     def __init__(self) -> None:
         self.battery_fabricator = Fabricator(
             interval=500,
-            poll_from=battery.status["percentage"],
+            default_value=100,
+            poll_from=lambda _: battery.status["percentage"],
             on_changed=lambda f, v: self.update_bat_percent(v),
         )
 
@@ -65,7 +67,7 @@ class Bar(Window):
             end_children=Box(
                 orientation="h",
                 spacing=10,
-                children=[DateTime("%H:%M"), BatteryWidget.bat_label],
+                children=[BatteryWidget.bat_label, DateTime("%a %d %H:%M")],
             ),
         )
 
