@@ -33,14 +33,13 @@ class AudioWidget:
         self.volume_label.set_label(str(self.volume_level) + "%")
 
 
-class BatteryWidget:
+class BatteryWidget(Label):
     bat_percent: int = 0
-    bat_label: Label = Label("")
 
     def update_bat_percent(self, v):
         # Update the percentage
         self.bat_percent = math.floor(v)
-        self.bat_label.set_label(str(self.bat_percent) + "%")
+        self.set_label(str(self.bat_percent) + "%")
         # print(self.bat_percent)
 
         # On Low Battery
@@ -50,6 +49,7 @@ class BatteryWidget:
         pass
 
     def __init__(self) -> None:
+        super().__init__("")
         self.battery_fabricator = Fabricator(
             interval=500,
             default_value=100,
@@ -90,7 +90,7 @@ class Bar(Window):
                 orientation="h",
                 spacing=10,
                 children=[
-                    BatteryWidget.bat_label,
+                    BatteryWidget(),
                     DateTime("%a %d %H:%M"),
                     AudioWidget.volume_label,
                 ],
@@ -105,4 +105,5 @@ if __name__ == "__main__":
     app = Application("top-bar", Bar())
     app.set_stylesheet_from_file(get_relative_path("./style.css"))
     BatteryWidget()
+    AudioWidget()
     app.run()
