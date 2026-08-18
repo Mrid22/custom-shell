@@ -7,20 +7,19 @@ from fabric.utils import get_relative_path
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
-from fabric.audio.service import Audio, AudioStream
+from fabric.audio.service import Audio
 from plyer import battery
 
 
-class AudioWidget:
-    volume_label: Label = Label("")
-    volume_level: float = 0.0
+class VolumeWidget(Label):
+    def __init__(self) -> None:
+        super().__init__("")
 
-    def __init__(self, **kwargs):
         self.audio = Audio(notify_speaker=self.on_speaker_changed)
-        self.volume_fabricator = Fabricator(
+        self.vol_fabricator = Fabricator(
             interval=500,
             default_value=100,
-            poll_from=lambda _: self.audio.speaker.volume,
+            poll_from=lambda _: self.audio,
             on_changed=lambda f, v: self.on_speaker_changed(),
         )
 
@@ -28,9 +27,7 @@ class AudioWidget:
         if not self.audio.speaker:
             return
 
-        self.volume_level = self.audio.speaker.volume / 100
-        print(self.volume_level)
-        self.volume_label.set_label(str(self.volume_level) + "%")
+        self.set_label(str(math.floor(round(self.audio.speaker.volume))) + "%")
 
 
 class BatteryWidget(Label):
@@ -38,7 +35,7 @@ class BatteryWidget(Label):
 
     def update_bat_percent(self, v):
         # Update the percentage
-        self.bat_percent = math.floor(v)
+        self.bat_percent = math.floor(round(v))
         self.set_label(str(self.bat_percent) + "%")
         # print(self.bat_percent)
 
@@ -89,11 +86,7 @@ class Bar(Window):
             end_children=Box(
                 orientation="h",
                 spacing=10,
-                children=[
-                    BatteryWidget(),
-                    DateTime("%a %d %H:%M"),
-                    AudioWidget.volume_label,
-                ],
+                children=[VolumeWidget(), BatteryWidget(), DateTime("%a %d %H:%M")],
             ),
         )
 
@@ -105,5 +98,5 @@ if __name__ == "__main__":
     app = Application("top-bar", Bar())
     app.set_stylesheet_from_file(get_relative_path("./style.css"))
     BatteryWidget()
-    AudioWidget()
+    VolumeWidget()
     app.run()
