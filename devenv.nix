@@ -75,6 +75,7 @@
       requirements = ''
         plyer
         mypy
+        git+https://github.com/Fabric-Development/fabric.git
       '';
     };
   };
