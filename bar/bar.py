@@ -13,6 +13,7 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
 from fabric.audio.service import Audio
 from plyer import battery, wifi
+from gi.repository import Playerctl
 
 
 class WifiWidget(Label):
