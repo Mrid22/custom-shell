@@ -8,11 +8,21 @@ from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
 from fabric.audio.service import Audio
-from plyer import battery
+from plyer import battery, wifi
+
+
+class WifiWidget(Label):
+    def __init__(self):
+        super().__init__("")
+        self.connected = wifi.is_connected()
+        self.wifi_names = wifi.get_available_wifi()
+        self.wifi_info = wifi.get_network_info(self.wifi_names[1])
+        self.wifi_name = self.wifi_info["ssid"]
+        self.set_label(self.wifi_name)
 
 
 class VolumeWidget(Label):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__("")
 
         self.audio = Audio(notify_speaker=self.on_speaker_changed)
@@ -38,7 +48,6 @@ class BatteryWidget(Label):
         # Update the percentage
         self.bat_percent = math.floor(round(v))
         self.set_label(str(self.bat_percent) + "%")
-        # print(self.bat_percent)
 
         # On Low Battery
         self.on_battery_low()
@@ -88,6 +97,7 @@ class Bar(Window):
                 orientation="h",
                 spacing=10,
                 children=[
+                    WifiWidget(),
                     VolumeWidget(),
                     BatteryWidget(),
                     DateTime("%a %d %H:%M"),
@@ -103,5 +113,6 @@ if __name__ == "__main__":
     app = Application("top-bar", Bar())
     app.set_stylesheet_from_file(get_relative_path("./style.css"))
     BatteryWidget()
+    WifiWidget()
     VolumeWidget()
     app.run()

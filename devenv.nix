@@ -73,6 +73,7 @@
       enable = true;
       requirements = ''
         plyer
+        wifi
         mypy
         git+https://github.com/Fabric-Development/fabric.git
       '';
