@@ -26,8 +26,9 @@ class VolumeWidget(Label):
     def on_speaker_changed(self):
         if not self.audio.speaker:
             return
-
-        self.set_label(str(math.floor(round(self.audio.speaker.volume))) + "%")
+        volume = math.floor(round(self.audio.speaker.volume))
+        mute_indicator = " (Muted)" if self.audio.speaker.muted else ""
+        self.set_label(f"{volume}%{mute_indicator}")
 
 
 class BatteryWidget(Label):
@@ -86,7 +87,11 @@ class Bar(Window):
             end_children=Box(
                 orientation="h",
                 spacing=10,
-                children=[VolumeWidget(), BatteryWidget(), DateTime("%a %d %H:%M")],
+                children=[
+                    VolumeWidget(),
+                    BatteryWidget(),
+                    DateTime("%a %d %H:%M"),
+                ],
             ),
         )
 

@@ -67,7 +67,6 @@
         setuptools
         cmake
         wheel
-        plyer
         psutil
       ]);
     venv = {
