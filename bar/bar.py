@@ -1,5 +1,9 @@
 import math
-from fabric.hyprland.widgets import ActiveWindow, WorkspaceButton, Workspaces
+from fabric.hyprland.widgets import (
+    HyprlandActiveWindow,
+    WorkspaceButton,
+    HyprlandWorkspaces,
+)
 from fabric import Application, Fabricator
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
@@ -80,7 +84,7 @@ class Bar(Window):
             start_children=Box(
                 orientation="h",
                 spacing=10,
-                children=Workspaces(
+                children=HyprlandWorkspaces(
                     name="Workspaces",
                     spacing=10,
                     buttons_factory=lambda ws_id: WorkspaceButton(
@@ -91,7 +95,7 @@ class Bar(Window):
             center_children=Box(
                 orientation="h",
                 spacing=10,
-                children=[ActiveWindow()],
+                children=[HyprlandActiveWindow()],
             ),
             end_children=Box(
                 orientation="h",
