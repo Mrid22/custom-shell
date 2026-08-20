@@ -16,6 +16,10 @@ from plyer import battery, wifi
 from gi.repository import Playerctl
 
 
+class PlayerWidget(Box):
+    pass
+
+
 class WifiWidget(Label):
     def __init__(self):
         super().__init__("")
