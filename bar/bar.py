@@ -13,7 +13,6 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
 from fabric.audio.service import Audio
 from plyer import battery, wifi
-from gi.repository import Playerctl
 
 
 class PlayerWidget(Box):
@@ -28,6 +27,16 @@ class WifiWidget(Label):
         self.wifi_info = wifi.get_network_info(self.wifi_names[1])
         self.wifi_name = self.wifi_info["ssid"]
         self.set_label(self.wifi_name)
+
+        self.wifi_fabricator = Fabricator(
+            interval=500,
+            default_value=100,
+            poll_from=lambda _: self.wifi_info["ssid"],
+            on_changed=lambda f, v: self.update_wifi_name(v),
+        )
+
+    def update_wifi_name(self, v):
+        self.set_label(v)
 
 
 class VolumeWidget(Label):
