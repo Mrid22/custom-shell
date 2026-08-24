@@ -8,3 +8,7 @@
 window {
   background-color: rgba(181, 119, 134, 0.5);
 }
+
+.low-battery {
+  color: red;
+}

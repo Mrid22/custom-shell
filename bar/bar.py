@@ -71,7 +71,7 @@ class BatteryWidget(Label):
         self.on_battery_low()
 
     def on_battery_low(self):
-        pass
+        BatteryWidget.add_style_class(self, "low-battery")
 
     def __init__(self) -> None:
         super().__init__("")
