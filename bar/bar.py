@@ -68,7 +68,8 @@ class BatteryWidget(Label):
         self.set_label(str(self.bat_percent) + "%")
 
         # On Low Battery
-        self.on_battery_low()
+        if v <= 20:
+            self.on_battery_low()
 
     def on_battery_low(self):
         BatteryWidget.add_style_class(self, "low-battery")
