@@ -24,7 +24,7 @@ class WifiWidget(Label):
         super().__init__("")
         self.connected = wifi.is_connected()
         self.wifi_names = wifi.get_available_wifi()
-        self.wifi_info = wifi.get_network_info(self.wifi_names[1])
+        self.wifi_info = wifi.get_network_info(self.wifi_names[0])
         self.wifi_name = self.wifi_info["ssid"]
         self.set_label(self.wifi_name)
 

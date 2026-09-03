@@ -8,6 +8,8 @@
     go
     ninja
     gobject-introspection
+    glib
+    libffi
     libdbusmenu-gtk3
     gdk-pixbuf
     gnome-bluetooth
