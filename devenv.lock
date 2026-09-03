@@ -3,11 +3,11 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1788213407,
-        "narHash": "sha256-zxEb+L6moGAWY+HXqAOTKIBb7tNYYWc+Km1+6byphb0=",
+        "lastModified": 1788402531,
+        "narHash": "sha256-vkKkue371vWQIKJBbVM/QTk6XU65PKJ+q39Q6+OKIVk=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "97135e80b6e432f41f84f72383e1b8147f33ef0c",
+        "rev": "30058c52e5b8d7ed7ba4d8e7c793c7726aa7b9a0",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1787936999,
-        "narHash": "sha256-DJ8sQiuRGEgGVLyXtZ4+057YxSpqJnGET9wzOhthBUo=",
+        "lastModified": 1788295930,
+        "narHash": "sha256-zE6E/ohv4i6Bw1NCNu6cDAhnEwlz0j+eIp3X1Id4gso=",
         "owner": "Fabric-Development",
         "repo": "fabric",
-        "rev": "8ae7550978c443d45984ba68f79158536dc26dd7",
+        "rev": "d54883db239841c0722d0970ec782f635e632e2c",
         "type": "github"
       },
       "original": {
