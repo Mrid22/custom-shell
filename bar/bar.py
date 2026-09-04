@@ -15,10 +15,6 @@ from fabric.audio.service import Audio
 from plyer import battery, wifi
 
 
-class AudioBox(Box):
-    pass
-
-
 class WifiWidget(Label):
     def __init__(self):
         super().__init__("")
@@ -57,7 +53,6 @@ class VolumeWidget(Label):
         volume = math.floor(round(self.audio.speaker.volume))
         mute_indicator = " (Muted)" if self.audio.speaker.muted else ""
         self.set_label(f"{volume}%{mute_indicator}")
-        AudioBox()
 
 
 class BatteryWidget(Label):
