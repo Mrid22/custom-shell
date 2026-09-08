@@ -17,7 +17,12 @@
     pkgconf
     pkg-config
     cmake
+    playerctl
   ];
+
+  enterShell = ''
+    export GI_TYPELIB_PATH="${pkgs.playerctl}/lib/girepository-1.0''${GI_TYPELIB_PATH:+:$GI_TYPELIB_PATH}"
+  '';
 
   enterTest = ''
     echo "Running tests"
