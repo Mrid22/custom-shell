@@ -17,9 +17,13 @@ from gi.repository import Playerctl
 
 
 class PlayerWidget(Label):
+    manager = Playerctl.PlayerManager()
+
     def __init__(self):
         super().__init__("")
-        self.manager = Playerctl.PlayerManager()
+
+    def on_play(self, player, status, manager):
+        print("player is playing: {}".format(player.props.player_name))
 
 
 class WifiWidget(Label):
