@@ -24,6 +24,7 @@ class PlayerWidget(Label):
 
     def on_play(self, player, status, manager):
         print("player is playing: {}".format(player.props.player_name))
+        self.set_label(player.props.player_name)
 
 
 class WifiWidget(Label):
