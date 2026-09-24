@@ -13,18 +13,74 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.centerbox import CenterBox
 from fabric.audio.service import Audio
 from plyer import battery, wifi
+import gi
+
+gi.require_version("Playerctl", "2.0")
+
 from gi.repository import Playerctl
 
 
 class PlayerWidget(Label):
-    manager = Playerctl.PlayerManager()
-
     def __init__(self):
         super().__init__("")
+        self.player = None
+        self.manager = Playerctl.PlayerManager()
+        self.manager.connect("name-appeared", self.on_name_appeared)
+        self.manager.connect("player-vanished", self.on_player_vanished)
+        self.manager.connect("name-vanished", self.on_name_vanished)
+        for name in self.manager.props.player_names:
+            self.on_name_appeared(self.manager, name)
 
-    def on_play(self, player, status, manager):
-        print("player is playing: {}".format(player.props.player_name))
-        self.set_label(player.props.player_name)
+    def on_name_appeared(self, manager, name):
+        if self.player is not None:
+            return
+        self.player = Playerctl.Player.new_from_name(name)
+        self.player.connect("playback-status::playing", self.on_playing)
+        self.player.connect("playback-status::paused", self.on_paused)
+        self.player.connect("playback-status::stopped", self.on_stopped)
+        self.player.connect("metadata", self.on_metadata)
+        manager.manage_player(self.player)
+        self.update_label()
+
+    def on_player_vanished(self, manager, player):
+        if player is self.player:
+            self.player = None
+            self.set_label("")
+
+    def on_name_vanished(self, manager, name):
+        if self.player is None:
+            return
+        if self.player.props.player_name == getattr(name, "name", ""):
+            self.player = None
+            self.set_label("")
+
+    def on_playing(self, player, status):
+        self.update_label()
+
+    def on_paused(self, player, status):
+        self.update_label()
+
+    def on_stopped(self, player, status):
+        self.set_label("")
+
+    def on_metadata(self, player, metadata):
+        self.update_label()
+
+    def update_label(self):
+        if self.player is None:
+            return
+        title = self.player.get_title()
+        artist = self.player.get_artist()
+        status = self.player.props.playback_status
+        if (
+            status != Playerctl.PlaybackStatus.PLAYING
+            and status != Playerctl.PlaybackStatus.PAUSED
+        ):
+            self.set_label("")
+            return
+        icon = "▶ " if status == Playerctl.PlaybackStatus.PLAYING else "⏸ "
+        track = f"{artist} - {title}" if artist else title
+        self.set_label(f"{icon}{track}")
 
 
 class WifiWidget(Label):
@@ -124,6 +180,7 @@ class Bar(Window):
                 orientation="h",
                 spacing=10,
                 children=[
+                    PlayerWidget(),
                     WifiWidget(),
                     VolumeWidget(),
                     BatteryWidget(),
