@@ -5,6 +5,7 @@ from fabric.hyprland.widgets import (
     HyprlandWorkspaces,
 )
 from fabric import Application, Fabricator
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 from fabric.utils import get_relative_path
@@ -80,6 +81,9 @@ class PlayerWidget(Label):
             return
         track = f"{title} - {artist}" if artist else title
         self.set_label(track)
+
+
+clickable_player = EventBox("button-press", PlayerWidget())
 
 
 class WifiWidget(Label):
