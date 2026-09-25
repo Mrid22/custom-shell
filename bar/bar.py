@@ -78,9 +78,8 @@ class PlayerWidget(Label):
         ):
             self.set_label("")
             return
-        icon = "▶ " if status == Playerctl.PlaybackStatus.PLAYING else "⏸ "
-        track = f"{artist} - {title}" if artist else title
-        self.set_label(f"{icon}{track}")
+        track = f"{title} - {artist}" if artist else title
+        self.set_label(track)
 
 
 class WifiWidget(Label):
