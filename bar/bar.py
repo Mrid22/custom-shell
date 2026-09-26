@@ -83,9 +83,6 @@ class PlayerWidget(Label):
         self.set_label(track)
 
 
-clickable_player = EventBox("button-press", PlayerWidget())
-
-
 class WifiWidget(Label):
     def __init__(self):
         super().__init__("")
