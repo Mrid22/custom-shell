@@ -68,7 +68,7 @@ class PlayerWidget(Label):
         self.update_label()
 
     def update_label(self):
-        if self.player is None:
+        if self.player is None or "youtube" in self.player.get_url():
             return
         title = self.player.get_title()
         artist = self.player.get_artist()
@@ -132,8 +132,10 @@ class BatteryWidget(Label):
         self.set_label(str(self.bat_percent) + "%")
 
         # On Low Battery
-        if v <= 20:
+        if v <= 25:
             self.on_battery_low()
+        else:
+            BatteryWidget.remove_style_class(self, "low-battery")
 
     def on_battery_low(self):
         BatteryWidget.add_style_class(self, "low-battery")
